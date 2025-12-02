@@ -1,0 +1,41 @@
+/* Global Font Setting */
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+
+/* Scrollbar Hiding Utilities */
+.scrollbar-hide::-webkit-scrollbar { 
+    display: none; 
+}
+.scrollbar-hide { 
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+/* Custom Checkbox/Radio - Golden Yellow Theme */
+.custom-radio:checked + div { 
+    background-color: #eab308; 
+    border-color: #eab308; 
+}
+.custom-radio:checked + div .dot { 
+    display: block; 
+}
+
+/* Smooth Gradients - Minimalist Black/Zinc */
+.hero-gradient { 
+    background: linear-gradient(135deg, #09090b 0%, #18181b 100%); 
+}
+
+/* Card Hover Effects */
+.card-hover:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); 
+}
+
+/* Progress Bar Animation */
+@keyframes loadProgress { 
+    from { width: 0; } 
+}
+.progress-bar { 
+    animation: loadProgress 1s ease-out forwards; 
+}

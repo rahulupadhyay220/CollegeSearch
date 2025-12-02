@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CollegeSearch - Study Abroad & College Search</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col relative">
+
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-yellow-500 text-sm"></i>
+                </div>
+                <span class="text-xl font-bold text-gray-900 tracking-tight">
+                    College<span class="text-yellow-600">Search</span>
+                </span>
+            </div>
+
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-600">
+                <a href="#" class="hover:text-yellow-600 transition">Study Abroad</a>
+                <a href="#" class="hover:text-yellow-600 transition">Colleges</a>
+                <a href="#" class="hover:text-yellow-600 transition">Test Prep</a>
+                <a href="#" class="hover:text-yellow-600 transition">Scholarships</a>
+                <div class="h-4 w-px bg-gray-300"></div>
+                <button class="flex items-center gap-2 text-gray-700 hover:text-yellow-600 transition">
+                    <i class="fas fa-user-circle text-lg"></i> Sign In
+                </button>
+                <button class="bg-yellow-500 text-gray-900 px-5 py-2 rounded-full hover:bg-yellow-400 transition shadow-lg shadow-yellow-200 font-bold text-sm flex items-center gap-2">
+                    <i class="fas fa-phone-alt text-xs"></i> Talk to Expert
+                </button>
+            </nav>
+
+            <button class="lg:hidden text-gray-900 p-2" onclick="alert('Mobile menu (Demo)')">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="hero-gradient text-white py-12 md:py-20 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-yellow-500 rounded-full mix-blend-overlay filter blur-3xl opacity-10 animate-blob"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-orange-500 rounded-full mix-blend-overlay filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+
+        <div class="container mx-auto px-4 relative z-10 text-center max-w-4xl">
+            <span class="inline-block py-1 px-3 rounded-full bg-gray-800 border border-gray-700 text-yellow-500 text-xs font-semibold mb-4 tracking-wide uppercase">
+                🚀 #1 Trusted Platform for Education
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                Your Journey to <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">Global Education</span> Starts Here
+            </h1>
+            <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                Discover universities, compare courses, and get free expert guidance for your study abroad dreams.
+            </p>
+            
+            <div class="bg-white p-2 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center max-w-3xl mx-auto transform transition-all hover:scale-[1.01]">
+                <div class="flex-1 flex items-center w-full border-b md:border-b-0 md:border-r border-gray-100 p-2">
+                    <i class="fas fa-search text-gray-400 ml-3 mr-3 text-lg"></i>
+                    <input type="text" id="searchInput" 
+                           placeholder="University, Course or Country..." 
+                           class="w-full py-2 outline-none text-gray-700 placeholder-gray-400 bg-transparent text-sm md:text-base"
+                           oninput="handleSearch(this.value)">
+                </div>
+                <button class="w-full md:w-auto mt-2 md:mt-0 bg-yellow-500 text-gray-900 px-8 py-3.5 rounded-xl hover:bg-yellow-400 font-bold transition flex items-center justify-center gap-2">
+                    Search <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <section class="py-12 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i class="fas fa-map-marked-alt text-yellow-600"></i> Explore Top Destinations
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <button onclick="setFilter('country', 'USA')" class="group p-4 rounded-xl border border-gray-100 hover:border-yellow-200 hover:bg-yellow-50 transition flex flex-col items-center gap-3 text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition">🇺🇸</div>
+                    <span class="text-sm font-semibold text-gray-700 group-hover:text-yellow-700">USA</span>
+                </button>
+                <button onclick="setFilter('country', 'UK')" class="group p-4 rounded-xl border border-gray-100 hover:border-yellow-200 hover:bg-yellow-50 transition flex flex-col items-center gap-3 text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition">🇬🇧</div>
+                    <span class="text-sm font-semibold text-gray-700 group-hover:text-yellow-700">UK</span>
+                </button>
+                <button onclick="setFilter('country', 'Canada')" class="group p-4 rounded-xl border border-gray-100 hover:border-yellow-200 hover:bg-yellow-50 transition flex flex-col items-center gap-3 text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition">🇨🇦</div>
+                    <span class="text-sm font-semibold text-gray-700 group-hover:text-yellow-700">Canada</span>
+                </button>
+                <button onclick="setFilter('country', 'Australia')" class="group p-4 rounded-xl border border-gray-100 hover:border-yellow-200 hover:bg-yellow-50 transition flex flex-col items-center gap-3 text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition">🇦🇺</div>
+                    <span class="text-sm font-semibold text-gray-700 group-hover:text-yellow-700">Australia</span>
+                </button>
+                <button onclick="setFilter('country', 'Germany')" class="group p-4 rounded-xl border border-gray-100 hover:border-yellow-200 hover:bg-yellow-50 transition flex flex-col items-center gap-3 text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition">🇩🇪</div>
+                    <span class="text-sm font-semibold text-gray-700 group-hover:text-yellow-700">Germany</span>
+                </button>
+                <button onclick="setFilter('country', 'India')" class="group p-4 rounded-xl border border-gray-100 hover:border-yellow-200 hover:bg-yellow-50 transition flex flex-col items-center gap-3 text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-2xl shadow-sm group-hover:scale-110 transition">🇮🇳</div>
+                    <span class="text-sm font-semibold text-gray-700 group-hover:text-yellow-700">India</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-8 flex-1">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <aside class="hidden lg:block w-64 flex-shrink-0 space-y-6">
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm sticky top-24">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-bold text-gray-900 flex items-center gap-2">
+                            <i class="fas fa-sliders-h text-yellow-600"></i> Filters
+                        </h3>
+                        <button onclick="resetFilters()" class="text-xs text-yellow-600 font-semibold hover:underline">Reset All</button>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Discipline</h4>
+                            <div class="space-y-2.5" id="streamFilters"></div>
+                        </div>
+                        <div class="h-px bg-gray-100"></div>
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Country</h4>
+                            <div class="space-y-2.5" id="locationFilters"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 p-5 rounded-2xl shadow-lg text-white">
+                    <h3 class="font-bold text-lg mb-2 text-yellow-500">Premium Guidance</h3>
+                    <p class="text-gray-400 text-xs mb-4">Get expert help with your application.</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-yellow-500"></i> SOP Review</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-yellow-500"></i> Visa Assistance</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-yellow-500"></i> Education Loan</li>
+                    </ul>
+                    <button class="w-full bg-yellow-500 text-gray-900 py-2 rounded-lg mt-4 text-sm font-bold hover:bg-yellow-400 transition">
+                        View Plans
+                    </button>
+                </div>
+            </aside>
+
+            <div class="flex-1">
+                <div class="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900" id="resultsTitle">Top Universities</h2>
+                        <p class="text-sm text-gray-500 mt-1" id="countLabel">Loading...</p>
+                    </div>
+                    
+                    <select class="bg-white border border-gray-200 text-gray-600 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block p-2.5 outline-none">
+                        <option>Sort by: Popularity</option>
+                        <option>Ranking: High to Low</option>
+                        <option>Fees: Low to High</option>
+                    </select>
+                </div>
+
+                <div class="lg:hidden mb-6 overflow-x-auto scrollbar-hide flex gap-2 pb-2" id="mobileFilters"></div>
+
+                <div id="collegeGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+
+                <div id="emptyState" class="hidden text-center py-20 bg-white rounded-2xl border-2 border-dashed border-gray-200">
+                    <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-search text-gray-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">No universities found</h3>
+                    <p class="text-gray-500 text-sm mt-1">Try adjusting your filters or search term.</p>
+                    <button onclick="resetFilters()" class="mt-4 text-yellow-600 font-semibold hover:underline">Clear all filters</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <button class="fixed bottom-6 right-6 bg-yellow-500 text-gray-900 p-4 rounded-full shadow-2xl hover:bg-yellow-400 transition z-50 group flex items-center gap-0 hover:gap-2 overflow-hidden px-4">
+        <i class="fab fa-whatsapp text-2xl"></i>
+        <span class="max-w-0 group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap font-bold">Chat with Expert</span>
+    </button>
+
+    <footer class="bg-black text-gray-400 py-12 border-t border-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-gray-900 text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">College<span class="text-yellow-500">Search</span></span>
+                    </div>
+                    <p class="text-sm mb-4 leading-relaxed">Your trusted partner for global education. We help students achieve their study abroad dreams with data-driven guidance.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Discover</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-yellow-500">Universities</a></li>
+                        <li><a href="#" class="hover:text-yellow-500">Scholarships</a></li>
+                        <li><a href="#" class="hover:text-yellow-500">Exams (IELTS/GRE)</a></li>
+                        <li><a href="#" class="hover:text-yellow-500">Student Visa</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Destinations</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-yellow-500">Study in USA</a></li>
+                        <li><a href="#" class="hover:text-yellow-500">Study in UK</a></li>
+                        <li><a href="#" class="hover:text-yellow-500">Study in Canada</a></li>
+                        <li><a href="#" class="hover:text-yellow-500">Study in Australia</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Get App</h4>
+                    <div class="flex gap-2">
+                        <button class="flex-1 bg-yellow-500 text-gray-900 py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-yellow-400 transition border border-yellow-500 font-bold">
+                            <i class="fab fa-apple"></i> <span class="text-xs font-semibold">iOS</span>
+                        </button>
+                        <button class="flex-1 bg-yellow-500 text-gray-900 py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-yellow-400 transition border border-yellow-500 font-bold">
+                            <i class="fab fa-google-play"></i> <span class="text-xs font-semibold">Android</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-xs text-gray-500">
+                &copy; 2025 CollegeSearch Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ... existing data ...
+        const STREAMS = ["Engineering", "Business", "Medicine", "Science", "Arts", "Law"];
+        const COUNTRIES = ["USA", "UK", "Canada", "Australia", "Germany", "India"];
+        
+        const COLLEGES_DATA = [
+            {
+                id: 101,
+                name: "Harvard University",
+                country: "USA",
+                location: "Cambridge, MA",
+                rating: 9.9,
+                reviews: "2.1k",
+                rank: "#1 Global",
+                img: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1000",
+                logo: "https://ui-avatars.com/api/?name=HU&background=000&color=fff",
+                fees: "$54,000 / yr",
+                course: "MS Computer Science",
+                stream: "Science",
+                featured: true,
+                chance: 15,
+                fastTrack: false,
+                tags: ["Ivy League", "Top Research"]
+            },
+            // ... (rest of the college data remains same) ...
+            {
+                id: 102,
+                name: "University of Oxford",
+                country: "UK",
+                location: "Oxford, UK",
+                rating: 9.8,
+                reviews: "1.8k",
+                rank: "#2 Global",
+                img: "https://images.unsplash.com/photo-1548504769-900b70ed122e?auto=format&fit=crop&q=80&w=1000",
+                logo: "https://ui-avatars.com/api/?name=OX&background=002147&color=fff",
+                fees: "£32,000 / yr",
+                course: "MBA",
+                stream: "Business",
+                featured: true,
+                chance: 25,
+                fastTrack: false,
+                tags: ["Ancient Univ", "Rhodes"]
+            },
+            {
+                id: 1,
+                name: "Indian Institute of Technology (IIT)",
+                country: "India",
+                location: "New Delhi, India",
+                rating: 9.3,
+                reviews: "854",
+                rank: "#1 in India",
+                img: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=1000",
+                logo: "https://ui-avatars.com/api/?name=IIT&background=b91c1c&color=fff",
+                fees: "₹ 2.25 Lakhs",
+                course: "B.Tech CS",
+                stream: "Engineering",
+                featured: true,
+                chance: 10,
+                fastTrack: false,
+                tags: ["Best ROI"]
+            },
+            {
+                id: 103,
+                name: "University of Toronto",
+                country: "Canada",
+                location: "Toronto, ON",
+                rating: 9.4,
+                reviews: "1.2k",
+                rank: "#1 in Canada",
+                img: "https://images.unsplash.com/photo-1599933399676-47b2b622837d?auto=format&fit=crop&q=80&w=1000",
+                logo: "https://ui-avatars.com/api/?name=UT&background=002A5C&color=fff",
+                fees: "CAD 45,000 / yr",
+                course: "B.Sc Data Science",
+                stream: "Science",
+                featured: false,
+                chance: 65, 
+                fastTrack: true, 
+                tags: ["Work Permit Friendly"]
+            },
+            {
+                id: 104,
+                name: "University of Melbourne",
+                country: "Australia",
+                location: "Melbourne, VIC",
+                rating: 9.1,
+                reviews: "950",
+                rank: "#1 in Aus",
+                img: "https://images.unsplash.com/photo-1510137600163-2729bc699982?auto=format&fit=crop&q=80&w=1000",
+                logo: "https://ui-avatars.com/api/?name=UM&background=094796&color=fff",
+                fees: "AUD 42,000 / yr",
+                course: "Master of Eng.",
+                stream: "Engineering",
+                featured: false,
+                chance: 72,
+                fastTrack: true,
+                tags: ["Research Hub"]
+            },
+            {
+                id: 105,
+                name: "Technical University of Munich",
+                country: "Germany",
+                location: "Munich, Germany",
+                rating: 9.5,
+                reviews: "780",
+                rank: "#1 in Germany",
+                img: "https://images.unsplash.com/photo-1590483863777-1a0670878a48?auto=format&fit=crop&q=80&w=1000",
+                logo: "https://ui-avatars.com/api/?name=TUM&background=3070b3&color=fff",
+                fees: "€ 148 / sem",
+                course: "M.Sc Informatics",
+                stream: "Engineering",
+                featured: true,
+                chance: 40,
+                fastTrack: false,
+                tags: ["No Tuition", "German Tech"]
+            }
+        ];
+
+        // ... existing state ...
+        let state = {
+            search: "",
+            stream: "",
+            country: ""
+        };
+
+        const grid = document.getElementById('collegeGrid');
+        const emptyState = document.getElementById('emptyState');
+        const countLabel = document.getElementById('countLabel');
+        const resultsTitle = document.getElementById('resultsTitle');
+        const searchInput = document.getElementById('searchInput');
+
+        function init() {
+            renderFilters();
+            renderMobileFilters();
+            renderGrid();
+        }
+
+        function getChanceColor(percentage) {
+            if (percentage < 30) return 'bg-red-500';
+            if (percentage < 60) return 'bg-yellow-500';
+            return 'bg-green-500';
+        }
+
+        function getChanceLabel(percentage) {
+            if (percentage < 30) return 'Ambitious';
+            if (percentage < 60) return 'Target';
+            return 'Safe';
+        }
+
+        function renderGrid() {
+            const filtered = COLLEGES_DATA.filter(c => {
+                const searchLower = state.search.toLowerCase();
+                const matchesSearch = 
+                    c.name.toLowerCase().includes(searchLower) || 
+                    c.location.toLowerCase().includes(searchLower) ||
+                    c.stream.toLowerCase().includes(searchLower) ||
+                    c.country.toLowerCase().includes(searchLower);
+                
+                const matchesStream = state.stream ? c.stream === state.stream : true;
+                const matchesCountry = state.country ? c.country === state.country : true;
+
+                return matchesSearch && matchesStream && matchesCountry;
+            });
+
+            countLabel.textContent = `Showing ${filtered.length} universities`;
+            let titleHTML = 'Top Universities';
+            if(state.country) titleHTML = `Universities in ${state.country}`;
+            resultsTitle.innerHTML = titleHTML;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                grid.innerHTML = filtered.map(college => `
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm card-hover transition-all duration-300 group flex flex-col h-full">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="${college.img}" alt="${college.name}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                            
+                            <div class="absolute top-3 left-3 flex flex-wrap gap-2">
+                                ${college.featured ? '<span class="bg-yellow-500/90 backdrop-blur-sm text-gray-900 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Featured</span>' : ''}
+                                ${college.fastTrack ? '<span class="bg-gray-900/90 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide flex items-center gap-1"><i class="fas fa-bolt text-yellow-500"></i> Fast Track</span>' : ''}
+                            </div>
+
+                            <button onclick="toggleHeart(this, event)" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center hover:bg-white text-white hover:text-red-500 transition shadow-lg">
+                                <i class="far fa-bookmark text-sm"></i>
+                            </button>
+
+                            <div class="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+                                <img src="${college.logo}" class="w-12 h-12 rounded-lg bg-white p-1 shadow-md">
+                                <div class="text-white flex-1 overflow-hidden">
+                                    <h3 class="font-bold text-lg leading-tight truncate shadow-black drop-shadow-md">${college.name}</h3>
+                                    <div class="flex items-center gap-2 text-xs text-gray-300 mt-1 font-medium">
+                                        <span><i class="fas fa-map-marker-alt text-yellow-500"></i> ${college.location}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-5 flex-1 flex flex-col">
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                ${college.tags.map(tag => `<span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md font-medium border border-gray-200">${tag}</span>`).join('')}
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <div class="text-xs text-gray-400 font-semibold uppercase">Est. Fees</div>
+                                    <div class="font-bold text-gray-900 text-sm">${college.fees}</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-400 font-semibold uppercase">Ranking</div>
+                                    <div class="font-bold text-gray-900 text-sm">${college.rank}</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-auto mb-5 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-gray-600">Admission Probability</span>
+                                    <span class="text-xs font-bold ${getChanceColor(college.chance).replace('bg-', 'text-')}">${getChanceLabel(college.chance)}</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                    <div class="${getChanceColor(college.chance)} h-1.5 rounded-full progress-bar" style="width: ${college.chance}%"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3 mt-auto">
+                                <button class="flex-1 bg-yellow-500 hover:bg-yellow-400 text-gray-900 py-2.5 rounded-lg text-sm font-bold transition shadow-md">
+                                    View Details
+                                </button>
+                                <button class="px-3 border border-gray-200 text-gray-400 hover:border-yellow-500 hover:text-yellow-500 rounded-lg transition">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function renderFilters() {
+            document.getElementById('streamFilters').innerHTML = STREAMS.map(stream => `
+                <label class="flex items-center gap-3 cursor-pointer group">
+                    <input type="radio" name="stream_desk" class="custom-radio hidden" 
+                           ${state.stream === stream ? 'checked' : ''}
+                           onchange="setFilter('stream', '${stream}')">
+                    <div class="w-4 h-4 rounded border border-gray-300 flex items-center justify-center transition group-hover:border-yellow-500">
+                        <div class="dot w-2 h-2 bg-white rounded-full hidden"></div>
+                    </div>
+                    <span class="text-sm ${state.stream === stream ? 'text-yellow-600 font-bold' : 'text-gray-600 group-hover:text-yellow-600'}">${stream}</span>
+                </label>
+            `).join('');
+
+            document.getElementById('locationFilters').innerHTML = COUNTRIES.map(c => `
+                <label class="flex items-center gap-3 cursor-pointer group">
+                    <input type="radio" name="loc_desk" class="custom-radio hidden" 
+                           ${state.country === c ? 'checked' : ''}
+                           onchange="setFilter('country', '${c}')">
+                    <div class="w-4 h-4 rounded border border-gray-300 flex items-center justify-center transition group-hover:border-yellow-500">
+                        <div class="dot w-2 h-2 bg-white rounded-full hidden"></div>
+                    </div>
+                    <span class="text-sm ${state.country === c ? 'text-yellow-600 font-bold' : 'text-gray-600 group-hover:text-yellow-600'}">${c}</span>
+                </label>
+            `).join('');
+        }
+
+        function renderMobileFilters() {
+            const allFilters = [...STREAMS, ...COUNTRIES];
+            const container = document.getElementById('mobileFilters');
+            
+            container.innerHTML = allFilters.map(item => {
+                const isActive = state.stream === item || state.country === item;
+                const type = STREAMS.includes(item) ? 'stream' : 'country';
+                
+                return `
+                <button onclick="setFilter('${type}', '${isActive ? '' : item}')"
+                        class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium border transition ${
+                            isActive 
+                            ? 'bg-yellow-500 text-gray-900 border-yellow-500 shadow-md' 
+                            : 'bg-white text-gray-600 border-gray-200'
+                        }">
+                    ${item}
+                </button>
+            `}).join('');
+        }
+
+        function handleSearch(val) {
+            state.search = val;
+            renderGrid();
+        }
+
+        function setFilter(type, value) {
+            if (state[type] === value) {
+                state[type] = "";
+            } else {
+                state[type] = value;
+            }
+            renderFilters();
+            renderMobileFilters();
+            renderGrid();
+        }
+
+        function resetFilters() {
+            state.search = "";
+            state.stream = "";
+            state.country = "";
+            searchInput.value = "";
+            
+            document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
+            
+            renderFilters();
+            renderMobileFilters();
+            renderGrid();
+        }
+
+        function toggleHeart(btn, e) {
+            e.stopPropagation(); 
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                btn.classList.add('text-yellow-500', 'bg-white');
+                btn.classList.remove('text-white', 'bg-white/20');
+            } else {
+                icon.classList.add('far');
+                icon.classList.remove('fas');
+                btn.classList.remove('text-yellow-500', 'bg-white');
+                btn.classList.add('text-white', 'bg-white/20');
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
